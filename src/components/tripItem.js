@@ -1,4 +1,6 @@
 import {Card} from "react-bootstrap"
+import { Link} from "react-router-dom";
+
 const TripItem = (props)=>{
 return <Card style={{ width: '18rem' }}>
 <Link to={`/trips/${props.trip.slug}`}>
