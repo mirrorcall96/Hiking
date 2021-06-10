@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Home from './components/Home'
+import _trips from './trips';
+import TripList from './components/tripList'
+import TripDetail from './components/tripDetail'
+import NotFound from './components/notFound'
+
+import {Title,NavLink} from './styles'
+import { Route , Switch} from "react-router";
+import { Link} from "react-router-dom";
+
+import { Image,Navbar , Nav,Form} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
+  const [trips ,setTrip ]= useState(_trips);
+  const [unit ,setUnit ]= useState("km");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Title>
+        <Navbar bg="light" expand="lg" className="justify-content-between">
+        <Navbar.Brand as={Link} to="/"><Image width="15%" height="15%"/>Hiking</Navbar.Brand>
+              <Nav className="me-auto">
+                <Nav.Link  as={NavLink} to="/" >Home</Nav.Link>
+                <Nav.Link  as={NavLink} to="/trips">Trip List</Nav.Link>
+              </Nav>
+              <Form inline>
+              <Form.Control onChange={(e)=>setUnit(e.target.value)} as="select" >
+                <option value="km">Kilometer (KM)</option>
+                <option value="m">Mile (M)</option>
+              </Form.Control>
+            </Form>
+        </Navbar>
+        <Switch>
+          <Route exact path='/trips/:tripSlug' >
+            <TripDetail unit={unit} trips={trips} setTrip={setTrip}   />
+          </Route>
+          <Route exact path='/trips/' >
+            <TripList  unit={unit} trips={trips} setTrip={setTrip}  />
+          </Route>
+          <Route exact path='/' component={Home} />
+          <Route path='/' component={NotFound} />
+        </Switch>
+      </Title>
   );
 }
 
