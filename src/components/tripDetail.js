@@ -13,7 +13,6 @@ const TripDetail = (props)=>{
      recomendedTrip = recomendedTrip.map(trip => (<TripItem unit={props.unit} trip={trip} key={trip.id}/>))
 
     return <><center><Container>
-        <h1></h1>
     <Card style={{ width: '30rem' }}>
         <Helmet><title>{thisTrip.name}</title></Helmet>
     <Link to={`/trips/${thisTrip.slug}`}>
@@ -39,7 +38,6 @@ const TripDetail = (props)=>{
     {recomendedTrip}
 </div>
 </>
-
-    }
+ }
 
 export default TripDetail;
