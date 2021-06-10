@@ -1,10 +1,11 @@
-import {Form,Col,ToggleButton,ButtonGroup} from "react-bootstrap";
+import {Form,Col} from "react-bootstrap";
 const SearchBar = (props) => {
   return (
     <Form.Row>
-      <Form.Group as={Col}> <Form.Control onChange={(event) =>props.setQuery(event.target.value) } placeholder="Search"/> </Form.Group>
+      <Form.Group as={Col}>Search : <Form.Control onChange={(event) =>{props.setSearchWord(event.target.value);props.update(event.target.value,null,null)} } placeholder="Search"/> </Form.Group>
     <Form.Group as={Col}>
-    <Form.Control onChange={(event) =>props.setDifficulty(event.target.value) } as="select" 
+      Diffuculty : 
+    <Form.Control onChange={(event) =>{props.setDifficultyLevel(event.target.value);props.update(null,event.target.value,null)} } as="select" 
     >
         <option></option>
         <option>easy</option>
@@ -13,9 +14,15 @@ const SearchBar = (props) => {
       </Form.Control>
     </Form.Group>
     <Form.Group as={Col}>
-    <ButtonGroup toggle className="mb-2">
-      <ToggleButton type="checkbox" variant="primary" checked={props.order} onChange={(event)=>props.orderList(event.currentTarget.checked)}>Sort</ToggleButton>
-      </ButtonGroup>
+      Sort by:
+    <Form.Control onChange={(event) =>{props.setSortType(event.target.value);props.update(null,null,event.target.value)} } as="select" 
+    >
+        <option value="reset"></option>
+        <option value="length19">Length : 1-9</option>
+        <option value="length91">Length : 9-1</option>
+        <option value="nameAZ">Name : A-Z</option>
+        <option value="nameZA">Name : Z-A</option>
+      </Form.Control>
     </Form.Group>
     </Form.Row>
   );

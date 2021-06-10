@@ -33,7 +33,7 @@ const TripDetail = (props)=>{
     </Card>
 </Container>
 </center>
-<div class="jumbotron">
+<div className="jumbotron">
     <p><b>recommended List</b></p>
     {recomendedTrip}
 </div>
