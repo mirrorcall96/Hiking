@@ -11,6 +11,7 @@ import { Link} from "react-router-dom";
 
 import { Image,Navbar , Nav,Form} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
 
 function App() {
@@ -32,8 +33,11 @@ function App() {
             </Form>
         </Navbar>
         <Switch>
+          <Route exact path='/trips/:tripDifficulty(easy|meduim|hard)' >
+            <TripList  unit={unit} trips={trips} setTrip={setTrip}  />
+          </Route>
           <Route exact path='/trips/:tripSlug' >
-            <TripDetail unit={unit} trips={trips} setTrip={setTrip}   />
+            <TripDetail unit={unit} trips={_trips} setTrip={setTrip}   />
           </Route>
           <Route exact path='/trips/' >
             <TripList  unit={unit} trips={trips} setTrip={setTrip}  />
