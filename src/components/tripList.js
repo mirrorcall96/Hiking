@@ -32,7 +32,7 @@ const TripList = (props) =>{
     //console.log(searchWord,difficultyLevel,sortType);
 
 return <>
-<Helmet><title>All Products</title></Helmet>
+<Helmet><title>All Trips</title></Helmet>
 <SearchBar setSearchWord={setSearchWord} setDifficultyLevel={setDifficultyLevel} setSortType={setSortType} update={update}  />
     <Row>
     {newArray}
