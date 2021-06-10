@@ -1,6 +1,5 @@
 import {Form,Col} from "react-bootstrap";
 import RangeSlider from 'react-bootstrap-range-slider';
-import { Link} from "react-router-dom";
 import { useHistory } from "react-router";
 const SearchBar = (props) => {
   let history=useHistory();
