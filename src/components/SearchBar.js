@@ -5,11 +5,10 @@ const SearchBar = (props) => {
   let history=useHistory();
   return (
     <Form.Row>
-      <Form.Group as={Col}>Search : <Form.Control onChange={(event) =>{props.setSearchWord(event.target.value);props.update(event.target.value,null,null,null)} } placeholder="Search"/> </Form.Group>
+      <Form.Group as={Col}>Search : <Form.Control onChange={(event) =>props.setSearchWord(event.target.value) } placeholder="Search"/> </Form.Group>
     <Form.Group as={Col}>
       Diffuculty : 
-    <Form.Control onChange={(event) =>{history.push("/trips/"+event.target.value);props.setDifficultyLevel(event.target.value);props.update(null,event.target.value,null,null)} } as="select" 
-    >
+    <Form.Control onChange={(event) =>history.push("/trips/"+event.target.value) } as="select" >
         <option></option>
         <option selected={props.tripDifficulty==="easy"?"selected":""}>easy</option>
         <option selected={props.tripDifficulty==="meduim"?"selected":""}>meduim</option>
@@ -18,7 +17,7 @@ const SearchBar = (props) => {
     </Form.Group>
     <Form.Group as={Col}>
       Sort by:
-    <Form.Control onChange={(event) =>{props.setSortType(event.target.value);props.update(null,null,event.target.value,null)} } as="select" 
+    <Form.Control onChange={(event) =>props.setSortType(event.target.value) } as="select" 
     >
         <option value="reset"></option>
         <option value="length19">Length : 1-9</option>
@@ -29,7 +28,7 @@ const SearchBar = (props) => {
     </Form.Group>
     <Form.Group as={Col}>
       Trip Length
-      <RangeSlider max="25" value={props.length} onChange={changeEvent =>{props.setLength(changeEvent.target.value);props.update(null,null,null,changeEvent.target.value)}}/>
+      <RangeSlider max="25" value={props.length} onChange={changeEvent =>props.setLength(changeEvent.target.value)}/>
     </Form.Group>
     </Form.Row>
   );
