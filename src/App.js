@@ -33,14 +33,11 @@ function App() {
             </Form>
         </Navbar>
         <Switch>
-          <Route exact path='/trips/:tripDifficulty(easy|meduim|hard)' >
+          <Route exact path='/trips/:tripDifficulty(easy|meduim|hard)?' >
             <TripList  unit={unit} trips={trips} setTrip={setTrip}  />
           </Route>
           <Route exact path='/trips/:tripSlug' >
             <TripDetail unit={unit} trips={_trips} setTrip={setTrip}   />
-          </Route>
-          <Route exact path='/trips/' >
-            <TripList  unit={unit} trips={trips} setTrip={setTrip}  />
           </Route>
           <Route exact path='/' component={Home} />
           <Route path='/' component={NotFound} />

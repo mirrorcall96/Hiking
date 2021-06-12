@@ -1,4 +1,4 @@
-import { useState ,useEffect} from 'react';
+import { useState } from 'react';
 import {useParams} from 'react-router-dom'
 import { Helmet } from 'react-helmet';
 import {Row} from "react-bootstrap"
@@ -12,13 +12,7 @@ const TripList = (props) =>{
     const [length ,setLength ]= useState(20);
     let tripDifficulty=useParams().tripDifficulty;
     tripDifficulty=tripDifficulty?tripDifficulty:"";
-    
-    let newArray = props.trips.filter(trip=>!tripDifficulty || trip.difficulty===tripDifficulty).map(trip => {return (<TripItem unit={props.unit} trip={trip} key={trip.id}/>)}
-    );
-    const update =()=>{
 
-    }
-    useEffect(() => {
         let temp =[..._trips];
         temp = temp.filter(trip=>trip.name.toLowerCase().includes(searchWord.toLowerCase()) || trip.city.toLowerCase().includes(searchWord.toLowerCase()));
         temp = temp.filter(trip=>trip.length <= length);
@@ -31,12 +25,12 @@ const TripList = (props) =>{
             temp = temp.sort((a,b)=>b.name >= a.name?-1:1)
         else if (sortType==="nameZA")
             temp = temp.sort((a,b)=>b.name >= a.name?1:-1)
-        props.setTrip(temp)
-    }, [props,searchWord,tripDifficulty,sortType,length]);
+            let newArray = temp.filter(trip=>!tripDifficulty || trip.difficulty===tripDifficulty).map(trip => {return (<TripItem unit={props.unit} trip={trip} key={trip.id}/>)}
+            );
     console.log(tripDifficulty)
 return <>
 <Helmet><title>All Trips</title></Helmet>
-<SearchBar tripDifficulty={tripDifficulty?tripDifficulty:""}length={length} setLength={setLength} setSearchWord={setSearchWord} setSortType={setSortType} update={update}  />
+<SearchBar tripDifficulty={tripDifficulty?tripDifficulty:""}length={length} setLength={setLength} setSearchWord={setSearchWord} setSortType={setSortType}  />
     <Row>
     {newArray}
     </Row>
