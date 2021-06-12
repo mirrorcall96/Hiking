@@ -10,29 +10,25 @@ const TripList = (props) =>{
     const [searchWord ,setSearchWord ]= useState("");
     const [sortType ,setSortType ]= useState("");
     const [length ,setLength ]= useState(20);
-    let tripDifficulty=useParams().tripDifficulty;
-    tripDifficulty=tripDifficulty?tripDifficulty:"";
+    const tripDifficulty=useParams().tripDifficulty;;
 
-        let temp =[..._trips];
-        temp = temp.filter(trip=>trip.name.toLowerCase().includes(searchWord.toLowerCase()) || trip.city.toLowerCase().includes(searchWord.toLowerCase()));
-        temp = temp.filter(trip=>trip.length <= length);
-        temp = temp.filter(trip=>trip.difficulty===tripDifficulty || tripDifficulty==="")
-        if(sortType==="length19")
-            temp = temp.sort((a,b)=>a.length-b.length)
-        else if (sortType==="length91")
-            temp = temp.sort((a,b)=>b.length-a.length)
-        else if (sortType==="nameAZ")
-            temp = temp.sort((a,b)=>b.name >= a.name?-1:1)
-        else if (sortType==="nameZA")
-            temp = temp.sort((a,b)=>b.name >= a.name?1:-1)
-            let newArray = temp.filter(trip=>!tripDifficulty || trip.difficulty===tripDifficulty).map(trip => {return (<TripItem unit={props.unit} trip={trip} key={trip.id}/>)}
-            );
-    console.log(tripDifficulty)
+        let filteredTrips =_trips.filter(trip=>trip.name.toLowerCase().includes(searchWord.toLowerCase()) || trip.city.toLowerCase().includes(searchWord.toLowerCase()))
+        .filter(trip=>trip.length <= length)
+        .filter(trip=>trip.difficulty===tripDifficulty || !tripDifficulty);
+        switch(sortType){
+            case "length19" : filteredTrips.sort((a,b)=>a.length-b.length);break;
+            case "length91" : filteredTrips.sort((a,b)=>b.length-a.length);break;
+            case "nameAZ"   : filteredTrips.sort((a,b)=>b.name >= a.name?-1:1);break;
+            case "nameZA"   : filteredTrips.sort((a,b)=>b.name >= a.name?1:-1);break;  
+            default:break;    
+        }
+        filteredTrips = filteredTrips.map(trip => {return (<TripItem unit={props.unit} trip={trip} key={trip.id}/>)}
+        );
 return <>
 <Helmet><title>All Trips</title></Helmet>
 <SearchBar tripDifficulty={tripDifficulty?tripDifficulty:""}length={length} setLength={setLength} setSearchWord={setSearchWord} setSortType={setSortType}  />
     <Row>
-    {newArray}
+    {filteredTrips}
     </Row>
  
 </>}
